@@ -5,162 +5,184 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Dashboard</title>
     
-    <!-- Web App Manifest -->
+    <!-- Link the Web App Manifest -->
     <link rel="manifest" href="/manifest.json">
     
-    <!-- iOS Support -->
+    <!-- Add iOS support -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Health Dashboard">
+    <meta name="apple-mobile-web-app-title" content="Health Push Notifications">
     <link rel="apple-touch-icon" href="/icon-192.png">
     
-    <!-- Font Awesome for Icons -->
-    <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <!-- Add some basic CSS for styling -->
     <style>
-        :root {
-            --primary-color: #2c8e4b;
-            --background-light: #f4f9f9;
-            --background-dark: #121212;
-            --card-light: #fff;
-            --card-dark: #1e1e1e;
-            --text-light: #333;
-            --text-dark: #ddd;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: var(--background-light);
-            color: var(--text-light);
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            padding: 20px;
             height: 100vh;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        .dark-mode {
-            background-color: var(--background-dark);
-            color: var(--text-dark);
+            overflow: hidden;
         }
 
         .container {
+            display: flex;
+            flex-direction: column;
             flex-grow: 1;
             overflow-y: auto;
         }
 
         .header {
+            background-color: #1db954;
+            width: 100%;
+            padding: 20px;
+            border-radius: 12px;
+            color: white;
             text-align: center;
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
 
-        .toggle-mode {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
         .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
+            width: 100%;
+            margin-bottom: 80px;
         }
 
         .card {
-            background-color: var(--card-light);
-            padding: 20px;
+            background-color: #1e1e1e;
             border-radius: 12px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .dark-mode .card {
-            background-color: var(--card-dark);
+            transition: transform 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
 
+        .card h3 {
+            color: #1db954;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .card button {
+            background-color: #1db954;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .card button:hover {
+            background-color: #17a745;
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        /* Fixed Bottom Navigation Bar */
         .task-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+            background-color: #1e1e1e;
+            color: white;
             display: flex;
             justify-content: space-around;
-            background-color: var(--primary-color);
-            padding: 10px 0;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
             border-radius: 20px 20px 0 0;
+            z-index: 100;
         }
 
-        .task-item {
-            color: white;
+        .task-bar .task-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             cursor: pointer;
+            flex: 1;
+        }
+
+        .task-bar .task-item:hover {
+            opacity: 0.7;
+        }
+
+        .task-bar .task-item i {
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
-    <button class="toggle-mode" onclick="toggleDarkMode()">🌙</button>
     <div class="container">
         <div class="header">Health Dashboard</div>
         <div class="dashboard">
             <div class="card">
-                <i class="fa fa-heartbeat" style="font-size: 40px; color: var(--primary-color);"></i>
+                <i class="fas fa-heartbeat icon" style="color: #ff3b30;"></i>
                 <h3>Heart Rate</h3>
                 <p>Track your heart rate in real-time.</p>
+                <button>Enable Notifications</button>
             </div>
             <div class="card">
-                <i class="fa fa-running" style="font-size: 40px; color: var(--primary-color);"></i>
+                <i class="fas fa-running icon" style="color: #f39c12;"></i>
                 <h3>Activity</h3>
                 <p>Monitor your daily activity levels.</p>
+                <button>Track Activity</button>
             </div>
             <div class="card">
-                <i class="fa fa-tint" style="font-size: 40px; color: var(--primary-color);"></i>
+                <i class="fas fa-lightbulb icon" style="color: #1db954;"></i>
+                <h3>Health Tips</h3>
+                <p>Get personalized health tips.</p>
+                <button>Get Tips</button>
+            </div>
+            <div class="card">
+                <i class="fas fa-tint icon" style="color: #3498db;"></i>
                 <h3>Hydration</h3>
                 <p>Track your daily water intake.</p>
+                <button>Log Water Intake</button>
             </div>
         </div>
     </div>
-    
-    <div class="task-bar">
-        <div class="task-item"><i class="fa fa-heartbeat"></i><p>Heart</p></div>
-        <div class="task-item"><i class="fa fa-running"></i><p>Activity</p></div>
-        <div class="task-item"><i class="fa fa-tint"></i><p>Water</p></div>
-    </div>
 
-    <script>
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-        }
-        
-        document.addEventListener("DOMContentLoaded", () => {
-            if (localStorage.getItem("darkMode") === "true") {
-                document.body.classList.add("dark-mode");
-            }
-        });
-    </script>
+    <!-- Fixed Task Bar -->
+    <div class="task-bar">
+        <div class="task-item"><i class="fas fa-heartbeat"></i></div>
+        <div class="task-item"><i class="fas fa-running"></i></div>
+        <div class="task-item"><i class="fas fa-tint"></i></div>
+        <div class="task-item"><i class="fas fa-lightbulb"></i></div>
+    </div>
 </body>
 </html>
