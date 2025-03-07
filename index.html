@@ -5,29 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
+        /* Animated Gradient Background */
         body {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #121212;
+            background: linear-gradient(45deg, #ff6b6b, #f0c27b);
+            animation: gradient 10s ease infinite;
+            margin: 0;
             color: white;
         }
+
+        @keyframes gradient {
+            0% { background: linear-gradient(45deg, #ff6b6b, #f0c27b); }
+            50% { background: linear-gradient(45deg, #6a11cb, #2575fc); }
+            100% { background: linear-gradient(45deg, #ff6b6b, #f0c27b); }
+        }
+
         .login-container {
             background: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 300px;
         }
+
+        /* Input Container for Icons */
+        .input-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-container i {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
         input {
             width: 100%;
             padding: 10px;
+            padding-left: 30px; /* Make room for the icon */
             margin: 10px 0;
             border: none;
             border-radius: 5px;
         }
+
+        /* Focus effect for inputs */
+        input:focus {
+            outline: none;
+            border: 2px solid #1db954;
+        }
+
         button {
             background-color: #1db954;
             color: white;
@@ -37,26 +71,54 @@
             border-radius: 5px;
             font-size: 16px;
         }
+
         button:hover {
             background-color: #17a745;
         }
+
         .error {
             color: red;
             display: none;
+        }
+
+        .forgot-password {
+            color: #1db954;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <p class="error" id="error-msg">Invalid username or password</p>
-        <button onclick="login()">Login</button>
+        <form onsubmit="return login(event)">
+            <div class="input-container">
+                <i class="fa fa-user"></i>
+                <input type="text" id="username" placeholder="Username">
+            </div>
+            <div class="input-container">
+                <i class="fa fa-lock"></i>
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            <p class="error" id="error-msg">Invalid username or password</p>
+            <button type="submit">Login</button>
+            <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+        </form>
     </div>
 
+    <!-- Add Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
     <script>
-        function login() {
+        function login(event) {
+            event.preventDefault(); // Prevent the default form submission
+
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
