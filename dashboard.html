@@ -144,6 +144,29 @@
         .task-bar .task-item i {
             font-size: 24px;
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .dashboard {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+
+            .task-bar {
+                height: 50px;
+                flex-direction: row;
+                justify-content: space-evenly;
+            }
+
+            .task-bar .task-item i {
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -177,7 +200,6 @@
         </div>
     </div>
 
-    <!-- Fixed Task Bar -->
     <div class="task-bar">
         <div class="task-item"><i class="fas fa-heartbeat"></i></div>
         <div class="task-item"><i class="fas fa-running"></i></div>
