@@ -4,117 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        /* Clean Look with Black Background */
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #000; /* Black background */
-            margin: 0;
-            color: #fff; /* White text */
-        }
-
-        .login-container {
-            background: #222; /* Dark container background */
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: 300px; /* Adjusted width for a cleaner look */
-        }
-
-        h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: normal;
-            color: #fff;
-        }
-
-        .input-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 10px 0;
-            border: 2px solid #444; /* Subtle border */
-            border-radius: 5px;
-            background-color: #333; /* Dark input background */
-            color: white;
-            font-size: 16px;
-            box-sizing: border-box; /* Ensures padding doesn't overflow */
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #1db954; /* Green border on focus */
-        }
-
-        button {
-            background-color: #1db954; /* Green button */
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 100%; /* Full width for the button */
-        }
-
-        button:hover {
-            background-color: #17a745; /* Darker green when hovered */
-        }
-
-        .error {
-            color: red;
-            display: none;
-            margin-bottom: 15px;
-        }
-
-        .forgot-password {
-            color: #1db954;
-            text-decoration: none;
-            font-size: 14px;
-            margin-top: 10px;
-            display: block;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form onsubmit="return login(event)">
-            <div class="input-container">
-                <input type="text" id="username" placeholder="Username">
-            </div>
-            <div class="input-container">
-                <input type="password" id="password" placeholder="Password">
-            </div>
-            <p class="error" id="error-msg">Invalid username or password</p>
-            <button type="submit">Login</button>
-            <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
-        </form>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <p class="error" id="error-msg">Invalid username or password</p>
+        <button onclick="login()">Login</button>
     </div>
 
     <script>
-        function login(event) {
-            event.preventDefault(); // Prevent the default form submission
-
+        function login() {
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
             // Hardcoded credentials (you can replace this with a real database later)
-            const correctUsername = "jamie";
-            const correctPassword = "jamie0185";
+            const correctUsername = "admin";
+            const correctPassword = "password123";
 
             if (username === correctUsername && password === correctPassword) {
                 localStorage.setItem("loggedIn", "true"); // Store login state
