@@ -5,80 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
-        /* Animated Gradient Background */
+        /* Clean Look with Black Background */
         body {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(45deg, #ff6b6b, #f0c27b);
-            animation: gradient 10s ease infinite;
+            background-color: #000; /* Black background */
             margin: 0;
-            color: white;
-        }
-
-        @keyframes gradient {
-            0% { background: linear-gradient(45deg, #ff6b6b, #f0c27b); }
-            50% { background: linear-gradient(45deg, #6a11cb, #2575fc); }
-            100% { background: linear-gradient(45deg, #ff6b6b, #f0c27b); }
+            color: #fff; /* White text */
         }
 
         .login-container {
-            background: #1e1e1e;
-            padding: 20px;
+            background: #222; /* Dark container background */
+            padding: 30px;
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: 300px;
+            width: 350px; /* Slightly wider for a more spacious look */
         }
 
-        /* Input Container for Icons */
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: normal;
+            color: #fff;
+        }
+
         .input-container {
             position: relative;
-            margin-bottom: 15px;
-        }
-
-        .input-container i {
-            position: absolute;
-            top: 50%;
-            left: 10px;
-            transform: translateY(-50%);
-            color: #888;
+            margin-bottom: 20px;
         }
 
         input {
             width: 100%;
-            padding: 10px;
-            padding-left: 30px; /* Make room for the icon */
+            padding: 12px 20px;
             margin: 10px 0;
-            border: none;
+            border: 2px solid #444; /* Subtle border */
             border-radius: 5px;
-        }
-
-        /* Focus effect for inputs */
-        input:focus {
-            outline: none;
-            border: 2px solid #1db954;
-        }
-
-        button {
-            background-color: #1db954;
+            background-color: #333; /* Dark input background */
             color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
             font-size: 16px;
         }
 
+        input:focus {
+            outline: none;
+            border-color: #1db954; /* Green border on focus */
+        }
+
+        button {
+            background-color: #1db954; /* Green button */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%; /* Full width for the button */
+        }
+
         button:hover {
-            background-color: #17a745;
+            background-color: #17a745; /* Darker green when hovered */
         }
 
         .error {
             color: red;
             display: none;
+            margin-bottom: 15px;
         }
 
         .forgot-password {
@@ -99,11 +93,9 @@
         <h2>Login</h2>
         <form onsubmit="return login(event)">
             <div class="input-container">
-                <i class="fa fa-user"></i>
                 <input type="text" id="username" placeholder="Username">
             </div>
             <div class="input-container">
-                <i class="fa fa-lock"></i>
                 <input type="password" id="password" placeholder="Password">
             </div>
             <p class="error" id="error-msg">Invalid username or password</p>
